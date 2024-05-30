@@ -1,3 +1,27 @@
+/*
+* ========================================================================================
+*  Nombre del archivo: crossword-puzzle.js
+*  Autor: Mariela Montaldo
+*  Fecha de creación: 30/05/2024
+*  Última modificación: 30/05/2024
+*  Versión: 
+*
+*  Descripción:
+*  Este archivo contiene [breve descripción del propósito y funcionalidad del archivo].
+*
+*  Historial de modificaciones:
+*  - 30/05/2024: Mariela Montaldo - Creación del archivo.
+*
+*  Copyright (c) 2024 Mariela Montaldo.
+*
+*  Licencia:
+*  Este código está licenciado bajo la GPL-3.0. Para más información, 
+*  consulte el archivo LICENSE adjunto en el directorio raíz del proyecto o visite 
+*  https://fsf.org/.
+*
+* ========================================================================================
+*/
+
 
 let descriptions = [];
 let answers = [];
@@ -6,8 +30,7 @@ let answers = [];
 function drawCrossword (vWord, ans) {
     const container = document.getElementById('cpuzzle');
     let size = vWord.length;
-    container.innerHTML = '<form>';
-    let html='<table class="table table-borderless">';
+    let html='<form><table class="table table-borderless">';
     
     for(i=0; i < ans.length; i++) {
         html += '<tr>';
@@ -18,15 +41,12 @@ function drawCrossword (vWord, ans) {
         let color = false;
 
         for(j=0; j<36; j++) {
-
             if(j>=initPosition && j<=finalPosition && c<ans[i].length) {
-
                 if(ans[i][c] == vWord[i] && !color) {
                     html += '<td class="table-primary" id="clueword"><input type="text" size="1" maxlength="1" readonly="readonly" value="' + ans[i][c]+'" /></td>';
                     color = true;
                 } else
                     html += '<td class="table-secondary"><input type="hidden" value="'+ ans[i][c]+'"/><input type="text" class="form-control no-border" size="1" maxlength="1" /></td>';
-                    //html += '<td class="table-secondary"><input type="text" class="form-control no-border" size="1" value="' + ans[i][c]+'" /></td>';
                 c++;
 
             } else {
@@ -35,8 +55,7 @@ function drawCrossword (vWord, ans) {
         }
         html += '</tr>';
     }
-    container.innerHTML += html;
-    container.innerHTML += '</table></form>';
+    container.innerHTML += html + '</table><button class="btn btn-primary" type="submit">Verificar</button></form>';
 }
 
 function setCrosswordReferences(descriptions, container) {
@@ -49,8 +68,8 @@ function setCrosswordReferences(descriptions, container) {
 }
 
 // Interacción con el usuario - Validación de las respuestas
-function isAnswer(hWord, answers) {
-
+function validateAnswer() {
+    
 }
 
 // Función llamadora - Principal
