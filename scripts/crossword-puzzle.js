@@ -22,7 +22,7 @@ function drawCrossword (vWord, ans) {
             if(j>=initPosition && j<=finalPosition && c<ans[i].length) {
 
                 if(ans[i][c] == vWord[i] && !color) {
-                    html += '<td class="table-primary" id="clueword"><input type="text" size="1" maxlength="1" value="' + ans[i][c]+'" /></td>';
+                    html += '<td class="table-primary" id="clueword"><input type="text" size="1" maxlength="1" readonly="readonly" value="' + ans[i][c]+'" /></td>';
                     color = true;
                 } else
                     html += '<td class="table-secondary"><input type="hidden" value="'+ ans[i][c]+'"/><input type="text" class="form-control no-border" size="1" maxlength="1" /></td>';
