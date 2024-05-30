@@ -22,10 +22,6 @@
 * ========================================================================================
 */
 
-
-let descriptions = [];
-let answers = [];
-
 // Dibujar el crucigrama
 function drawCrossword (vWord, ans) {
     const container = document.getElementById('cpuzzle');
