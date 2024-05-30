@@ -3,7 +3,7 @@ let descriptions = [];
 let answers = [];
 
 // Dibujar el crucigrama
-function drawCrossword (vWord, ans, des) {
+function drawCrossword (vWord, ans) {
     const container = document.getElementById('cpuzzle');
     let size = vWord.length;
     container.innerHTML = '';
@@ -38,6 +38,15 @@ function drawCrossword (vWord, ans, des) {
     container.innerHTML += '</table>';
 }
 
+function setCrosswordReferences(descriptions, container) {
+    let cont = document.getElementById(container);
+    cont.innerHTML += '<ol class="list-group list-group-numbered">';
+    for(s of descriptions) {
+        cont.innerHTML += '<li class="list-group-item">' + s + '</li>';
+    }
+    cont.innerHTML += '</ol>';
+}
+
 // Interacción con el usuario - Validación de las respuestas
 function isAnswer(hWord, answers) {
 
@@ -45,13 +54,15 @@ function isAnswer(hWord, answers) {
 
 // Función llamadora - Principal
 function runCPuzzle() {
-    answers = ["literatura","marti","borges","cortazar","sabato"];
-    refs = ["Arte relacionado a la escritura de ficcion, ensayos, etc.", 
+    const answers = ["literatura","marti","borges","cortazar","sabato"];
+    const vword = "libro";
+    const refs = ["Arte relacionado a la escritura de ficcion, ensayos, etc.", 
                     "Poeta cubano revolucionario", 
                     "El Aleph fue escrito por...",
                     "Rayuela es obra de...",
                     "Escritor argentino que antes de dedicarse a la literatura existencialista, fue fisico"];
     
     // Validar tamaño de palabra vWord vs. Cantidad de elementos de arrays
-    drawCrossword("libro", answers, refs);
+    drawCrossword(vword, answers, refs);
+    setCrosswordReferences(refs,"references");
 }
