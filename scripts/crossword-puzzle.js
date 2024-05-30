@@ -6,8 +6,8 @@ let answers = [];
 function drawCrossword (vWord, ans) {
     const container = document.getElementById('cpuzzle');
     let size = vWord.length;
-    container.innerHTML = '';
-    let html='<table class="table table-bordered">';
+    container.innerHTML = '<form>';
+    let html='<table class="table table-borderless">';
     
     for(i=0; i < ans.length; i++) {
         html += '<tr>';
@@ -22,10 +22,10 @@ function drawCrossword (vWord, ans) {
             if(j>=initPosition && j<=finalPosition && c<ans[i].length) {
 
                 if(ans[i][c] == vWord[i] && !color) {
-                    html += '<td class="table-primary">' + ans[i][c]+'</td>';
+                    html += '<td class="table-primary" id="clueword"><input type="text" size="1" value="' + ans[i][c]+'" /></td>';
                     color = true;
                 } else
-                    html += '<td>' + ans[i][c]+'</td>';
+                    html += '<td class="table-secondary"><input type="text" class="form-control no-border" size="1" value="' + ans[i][c]+'" /></td>';
                 c++;
 
             } else {
@@ -35,7 +35,7 @@ function drawCrossword (vWord, ans) {
         html += '</tr>';
     }
     container.innerHTML += html;
-    container.innerHTML += '</table>';
+    container.innerHTML += '</table></form>';
 }
 
 function setCrosswordReferences(descriptions, container) {
