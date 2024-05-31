@@ -7,7 +7,10 @@
 *  Versión: 
 *
 *  Descripción:
-*  Este archivo contiene [breve descripción del propósito y funcionalidad del archivo].
+*  Este archivo contiene el código de validación y construcción del crucigrama. Dicho
+*  crucigrama está organizado en una tabla de 36x36, tomando como centro la posición
+*  número 18 y calculando desplazamientos en base a esto, para que la palabra dada
+*  como pista quede alineada verticalmente en la posición número 18.
 *
 *  Historial de modificaciones:
 *  - 30/05/2024: Mariela Montaldo - Creación del archivo.

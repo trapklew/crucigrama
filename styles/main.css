@@ -1,6 +1,4 @@
-/* configuro algunos parámetros generales del CSS */
 :root {
-  /* defino la fuente general para Bootstrap*/
   font-family: "Ubuntu", cursive;
   font-size: 16px;
   font-weight: 400;
@@ -9,9 +7,20 @@
   margin: 0;
   padding: 0;
 
-  /* definir variables */
   --wrong: #9f3647;
   --correct: rgb(60, 179, 113);
+  --a:#10002B;
+  --b:#240046;
+  --c:#3C096C;
+  --d:#5A189A;
+  --e:#7B2CBF;
+  --f:#9D4EDD;
+  --g:#C77DFF;
+  --h:#E0AAFF;
+}
+
+body {
+  background-color: rgb(238,238,238);
 }
 
 .table-borderless > tbody > tr > td,
@@ -23,17 +32,31 @@
     border: none;
 }
 
-/* Quita bordes a las tablas para que quede armado el crucigrama */
 .no-border {
   border: 0;
-  box-shadow: none; 
+  background-color: transparent;
+  box-shadow: none;
 }
 
-/* Quita iconos a valor invalido */
 .wrong-answer{
   border: 1px solid var(--wrong);
 }
 
 .correct-answer{
   border: 1px solid var(--correct);
+}
+
+
+/* ==================================== MAINNAV ==================================== */
+
+#mainNav {
+  width: 101%;
+  position: fixed;
+  top: 0px;
+  z-index: 10000;
+}
+
+/* ==================================== MAINNAV ==================================== */
+#mainContainer {
+  margin-top: 10rem;
 }
