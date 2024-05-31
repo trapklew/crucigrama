@@ -27,7 +27,7 @@ const refs = ["Arte de la expresión verbal",
                 "Apellido del escritor cubano iniciador del modernismo literario en Hispanoamérica.", 
                 "Apellido del escritor argentino autor de El Aleph",
                 "Apellido del escritor argentino autor de Rayuela",
-                "Escritor argentino que antes de dedicarse a la literatura existencialista, fue físico."];
+                "Apellido del escritor argentino que antes de dedicarse a la literatura existencialista, fue físico."];
 
 // Dibujar el crucigrama
 function drawCrossword (vWord, ans) {
