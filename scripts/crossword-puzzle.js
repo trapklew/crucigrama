@@ -23,11 +23,11 @@
 */
 const answers = ["literatura","marti","borges","cortazar","sabato"];
 const vword = "libro";
-const refs = ["Arte relacionado a la escritura de ficcion, ensayos, etc.", 
-                "Poeta cubano revolucionario", 
-                "El Aleph fue escrito por...",
-                "Rayuela es obra de...",
-                "Escritor argentino que antes de dedicarse a la literatura existencialista, fue fisico"];
+const refs = ["Arte de la expresión verbal", 
+                "Apellido del escritor cubano iniciador del modernismo literario en Hispanoamérica.", 
+                "Apellido del escritor argentino autor de El Aleph",
+                "Apellido del escritor argentino autor de Rayuela",
+                "Escritor argentino que antes de dedicarse a la literatura existencialista, fue físico."];
 
 // Dibujar el crucigrama
 function drawCrossword (vWord, ans) {
@@ -46,7 +46,7 @@ function drawCrossword (vWord, ans) {
         for(j=0; j<36; j++) {
             if(j>=initPosition && j<=finalPosition && c<ans[i].length) {
                 if(ans[i][c] == vWord[i] && !color) {
-                    html += '<td class="table-primary" id="clueword"><input type="text" size="1" maxlength="1" readonly="readonly" value="' + ans[i][c] + '" /></td>';
+                    html += '<td class="table-primary" id="clueword"><input type="text" size="1" maxlength="1" readonly="readonly" value="' + ans[i][c].toUpperCase() + '" /></td>';
                     color = true;
                 } else
                     html += '<td class="table-secondary"><input type="hidden" value="'+ ans[i][c] + '"/><input type="text" id="txt-' + i + '-' + c + '" onkeyup="validateChar(' + i + ',' + c + ')" class="form-control no-border" size="1" maxlength="1" /></td>';
@@ -58,7 +58,7 @@ function drawCrossword (vWord, ans) {
         }
         html += '</tr>';
     }
-    container.innerHTML += html + '</table><button class="btn btn-primary" type="submit">Verificar</button></form>';
+    container.innerHTML += html + '</table></form>';
 }
 
 function setCrosswordReferences(descriptions, container) {
@@ -73,17 +73,12 @@ function setCrosswordReferences(descriptions, container) {
 function validateChar(i, c) {
     const txtName = 'txt-' + i + '-' + c ;
     const e = document.getElementById(txtName);
-    if(e.value != answers[i][c]) {
+    if(e.value.toUpperCase() != answers[i][c].toUpperCase()) {
         e.classList.toggle("wrong-answer");
     }
-    if(e.value == answers[i][c]) {
+    if(e.value.toUpperCase() == answers[i][c].toUpperCase()) {
         e.classList.add("correct-answer");
     }
-}
-
-// Interacción con el usuario - Validación de las respuestas
-function validateAnswer() {
-     
 }
 
 // Función llamadora - Principal
