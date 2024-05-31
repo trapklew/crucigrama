@@ -20,7 +20,8 @@
 }
 
 body {
-  background-color: rgb(238,238,238);
+  /*background-color: rgb(238,238,238);*/
+  color: var(--a);
 }
 /*
 .table-borderless > tbody > tr > td,
@@ -56,14 +57,25 @@ body {
   z-index: 10000;
 }
 
-/* =================================== CONTAINER =================================== */
-#mainContainer {
-  margin-top: 10rem;
+.navbar.bg-body-tertiary {
+  background-color: #111;
 }
 
+/* =================================== CONTAINER =================================== */
+#mainContainer {
+  padding-top: 10rem;
+  padding-bottom: 10rem;
+  background-color: var(--h);
+}
+
+#mainContainer.container-fluid{
+  background-color: var(--h);
+}
 /* ===================================== TABLE ===================================== */
 td.table-secondary {
   background-color: var(--e);
+  border: 0.5px solid var(--d);
+  
 }
 
 td.table-secondary:hover{
@@ -78,6 +90,7 @@ td.table-secondary input{
 
 td#clueword.table-primary {
   background-color: var(--c);
+  border: 0.5px solid var(--a);
 }
 
 td#clueword.table-primary input{
@@ -86,4 +99,16 @@ td#clueword.table-primary input{
   border:0;
   font-weight: bold;
   text-align: center;
+}
+
+/* ===================================== FOOTER ===================================== */
+footer {
+  background-color: var(--a);
+  color: var(--h);
+}
+
+footer a {
+  color:var(--h);
+  text-decoration: none;
+  font-weight: bold;
 }
