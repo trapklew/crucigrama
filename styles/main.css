@@ -22,7 +22,7 @@
 body {
   background-color: rgb(238,238,238);
 }
-
+/*
 .table-borderless > tbody > tr > td,
 .table-borderless > tbody > tr > th,
 .table-borderless > tfoot > tr > td,
@@ -31,7 +31,7 @@ body {
 .table-borderless > thead > tr > th {
     border: none;
 }
-
+*/
 .no-border {
   border: 0;
   background-color: transparent;
@@ -56,7 +56,29 @@ body {
   z-index: 10000;
 }
 
-/* ==================================== MAINNAV ==================================== */
+/* =================================== CONTAINER =================================== */
 #mainContainer {
   margin-top: 10rem;
+}
+
+/* ===================================== TABLE ===================================== */
+td.table-secondary {
+  background-color: var(--e);
+}
+
+td.table-secondary input{
+  color:white;
+}
+
+
+td#clueword.table-primary {
+  background-color: var(--c);
+}
+
+td#clueword.table-primary input{
+  background-color: transparent;
+  color:white;
+  border:0;
+  font-weight: bold;
+  text-align: center;
 }
