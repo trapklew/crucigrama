@@ -11,7 +11,8 @@
 
   /* definir variables */
   --blanco: #ffffff;
-  --primario: #9f3647;
+  --wrong: #9f3647;
+  --correct: rgb(60, 179, 113);
   --negro: #181419;
   --gris: #808080;
 }
@@ -25,7 +26,17 @@
     border: none;
 }
 
+/* Quita bordes a las tablas para que quede armado el crucigrama */
 .no-border {
   border: 0;
-  box-shadow: none; /* You may want to include this as bootstrap applies these styles too */
+  box-shadow: none; 
+}
+
+/* Quita iconos a valor invalido */
+.wrong-answer{
+  border: 1px solid var(--wrong);
+}
+
+.correct-answer{
+  border: 1px solid var(--correct);
 }
