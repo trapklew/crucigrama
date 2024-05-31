@@ -66,6 +66,10 @@ td.table-secondary {
   background-color: var(--e);
 }
 
+td.table-secondary:hover{
+  background-color: var(--f);
+}
+
 td.table-secondary input{
   color:white;
   text-align: center;
