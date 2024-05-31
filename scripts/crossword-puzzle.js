@@ -83,7 +83,6 @@ function validateChar(i, c) {
 
 // Función llamadora - Principal
 function runCPuzzle() {
-    // Validar tamaño de palabra vWord vs. Cantidad de elementos de arrays
     drawCrossword(vword, answers, refs);
     setCrosswordReferences(refs,"references");
 }

@@ -10,11 +10,8 @@
   padding: 0;
 
   /* definir variables */
-  --blanco: #ffffff;
   --wrong: #9f3647;
   --correct: rgb(60, 179, 113);
-  --negro: #181419;
-  --gris: #808080;
 }
 
 .table-borderless > tbody > tr > td,
