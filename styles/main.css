@@ -66,6 +66,7 @@ body {
   padding-top: 10rem;
   padding-bottom: 10rem;
   background-color: var(--h);
+  overflow: scroll;
 }
 
 #mainContainer.container-fluid{
