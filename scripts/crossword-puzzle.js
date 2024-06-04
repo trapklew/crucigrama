@@ -52,7 +52,7 @@ function drawCrossword (vWord, ans) {
                     html += '<td class="table-primary" id="clueword"><input type="text" size="1" maxlength="1" readonly="readonly" value="' + ans[i][c].toUpperCase() + '" /></td>';
                     color = true;
                 } else
-                    html += '<td class="table-secondary"><input type="hidden" value="'+ ans[i][c] + '"/><input type="text" id="txt-' + i + '-' + c + '" onkeyup="validateChar(' + i + ',' + c + ')" class="form-control no-border" size="1" maxlength="1" /></td>';
+                    html += '<td class="table-secondary"><input type="text" id="txt-' + i + '-' + c + '" onkeyup="validateChar(' + i + ',' + c + ')" class="form-control no-border" size="1" maxlength="1" /></td>';
                 c++;
 
             } else {
