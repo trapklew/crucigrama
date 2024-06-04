@@ -39,15 +39,6 @@ body {
   box-shadow: none;
 }
 
-.wrong-answer{
-  border: 1px solid var(--wrong);
-}
-
-.correct-answer{
-  border: 1px solid var(--correct);
-}
-
-
 /* ==================================== MAINNAV ==================================== */
 
 #mainNav {
@@ -88,7 +79,6 @@ td.table-secondary input{
   text-align: center;
 }
 
-
 td#clueword.table-primary {
   background-color: var(--c);
   border: 0.5px solid var(--a);
@@ -100,6 +90,15 @@ td#clueword.table-primary input{
   border:0;
   font-weight: bold;
   text-align: center;
+}
+
+.wrong-answer{
+  border: 1px solid var(--wrong);
+}
+
+.correct-answer{
+  font-weight: bold;
+  border:none;
 }
 
 /* ===================================== FOOTER ===================================== */
