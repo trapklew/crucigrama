@@ -23,20 +23,15 @@ body {
   /*background-color: rgb(238,238,238);*/
   color: var(--a);
 }
-/*
-.table-borderless > tbody > tr > td,
-.table-borderless > tbody > tr > th,
-.table-borderless > tfoot > tr > td,
-.table-borderless > tfoot > tr > th,
-.table-borderless > thead > tr > td,
-.table-borderless > thead > tr > th {
-    border: none;
-}
-*/
+
 .no-border {
   border: 0;
   background-color: transparent;
   box-shadow: none;
+}
+
+.table>:not(caption)>*>* {
+  padding: 0;
 }
 
 /* ==================================== MAINNAV ==================================== */
