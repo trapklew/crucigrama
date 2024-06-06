@@ -67,7 +67,7 @@ function drawCrossword (vword, ans, showAnswers) {
 
 function setCrosswordReferences(descriptions, container) {
     let cont = document.getElementById(container);
-    cont.innerHTML += '<ol class="list-group list-group-numbered">';
+    cont.innerHTML += '<h3>Referencias</h3><ol class="list-group list-group-numbered">';
     for(s of descriptions) {
         cont.innerHTML += '<li class="list-group-item">' + s + '</li>';
     }
