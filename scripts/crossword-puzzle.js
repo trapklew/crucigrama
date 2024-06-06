@@ -3,8 +3,8 @@
 *  Nombre del archivo: crossword-puzzle.js
 *  Autor: Mariela Montaldo
 *  Fecha de creación: 30/05/2024
-*  Última modificación: 30/05/2024
-*  Versión: 
+*  Última modificación: 06/06/2024
+*  Versión: v0.1
 *
 *  Descripción:
 *  Este archivo contiene el código de validación y construcción del crucigrama. Dicho

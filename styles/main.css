@@ -20,7 +20,6 @@
 }
 
 body {
-  /*background-color: rgb(238,238,238);*/
   color: var(--a);
 }
 
@@ -100,7 +99,18 @@ td#clueword.table-primary input{
 }
 
 #cpuzzle {
-  overflow-x: scroll;
+  overflow-x: hidden;
+}
+
+/* ==================================== BUTTONS ===================================== */
+.btn.btn-primary {
+  color: var(--h);
+  background-color: var(--a);
+  border: 1px solid var(--c);
+}
+
+.btn.btn-primary:hover {
+  background-color: var(--c);
 }
 
 /* ===================================== FOOTER ===================================== */
@@ -113,4 +123,25 @@ footer a {
   color:var(--h);
   text-decoration: none;
   font-weight: bold;
+}
+
+/* ==================================== SCROLLBAR =================================== */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--g);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--b);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--c);
 }
