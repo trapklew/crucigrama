@@ -38,13 +38,13 @@ const _half = 17;
 function drawCrossword (vword, ans) {
     const container = document.getElementById('cpuzzle');
     let size = vword.length;
-    let html='<form><table class="table table-borderless">';
+    let html = '<form><table class="table table-borderless">';
     
     for(i=0; i < ans.length; i++) {
         html += '<tr>';
         
         let initPosition = _half - ans[i].indexOf(vword[i]);
-        let finalPosition = _half + ans[i].length-1;
+        let finalPosition = _half + ans[i].length - 1;
         let c = 0;
         let color = false;
 
@@ -56,7 +56,6 @@ function drawCrossword (vword, ans) {
                 } else
                     html += '<td class="table-secondary"><input type="text" id="txt-' + i + '-' + c + '" onkeyup="validateChar(' + i + ',' + c + ')" class="form-control no-border" size="1" maxlength="1" /></td>';
                 c++;
-
             } else {
                 html += '<td></td>';
             }
@@ -89,8 +88,13 @@ function validateChar(i, c) {
     }
 }
 
+function restart() {
+    document.getElementById('cpuzzle').innerHTML = '';
+    drawCrossword(_vword, _answers);
+}
+
 // Función llamadora - Principal
 function runCPuzzle() {
-    drawCrossword(_vword, _answers, _refs);
-    setCrosswordReferences(_refs,"references");
+    drawCrossword(_vword, _answers);
+    setCrosswordReferences(_refs, "references");
 }
