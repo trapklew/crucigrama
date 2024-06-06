@@ -43,12 +43,12 @@ function drawCrossword (vword, ans) {
     for(i=0; i < ans.length; i++) {
         html += '<tr>';
         
-        let initPosition = 17 - ans[i].indexOf(vword[i]);
-        let finalPosition = 17 + ans[i].length-1;
-        let c=0;
+        let initPosition = _half - ans[i].indexOf(vword[i]);
+        let finalPosition = _half + ans[i].length-1;
+        let c = 0;
         let color = false;
 
-        for(j=0; j<36; j++) {
+        for(j = 0; j < _size; j++) {
             if(j >= initPosition && j <= finalPosition && c < ans[i].length) {
                 if(ans[i][c] == vword[i] && !color) {
                     html += '<td class="table-primary" id="clueword"><input type="text" size="1" maxlength="1" readonly="readonly" value="' + ans[i][c].toUpperCase() + '" /></td>';
