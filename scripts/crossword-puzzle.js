@@ -85,6 +85,7 @@ function validateChar(i, c) {
     if(e.value.toUpperCase() == _answers[i][c].toUpperCase()) {
         e.classList.remove("wrong-answer");
         e.classList.add("correct-answer");
+        e.disabled = true;
     }
 }
 
