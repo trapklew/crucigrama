@@ -78,6 +78,10 @@ td#clueword.table-primary {
   border: 0.5px solid var(--a);
 }
 
+.form-control:disabled {
+  background-color: var(--f);
+}
+
 td#clueword.table-primary input{
   background-color: transparent;
   color:white;
