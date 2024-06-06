@@ -24,31 +24,33 @@
 *
 * ========================================================================================
 */
-const answers = ["literatura","marti","borges","cortazar","sabato"];
-const vword = "libro";
-const refs = ["Arte de la expresión verbal", 
+const _answers = ["literatura","marti","borges","cortazar","sabato"];
+const _vword = "libro";
+const _refs = ["Arte de la expresión verbal", 
                 "Apellido del escritor cubano iniciador del modernismo literario en Hispanoamérica.", 
                 "Apellido del escritor argentino autor de El Aleph",
                 "Apellido del escritor argentino autor de Rayuela",
                 "Apellido del escritor argentino que antes de dedicarse a la literatura existencialista, fue físico."];
+const _size = 36;
+const _half = 17;
 
 // Dibujar el crucigrama
-function drawCrossword (vWord, ans) {
+function drawCrossword (vword, ans) {
     const container = document.getElementById('cpuzzle');
-    let size = vWord.length;
+    let size = vword.length;
     let html='<form><table class="table table-borderless">';
     
     for(i=0; i < ans.length; i++) {
         html += '<tr>';
         
-        let initPosition = 17 - ans[i].indexOf(vWord[i]);
+        let initPosition = 17 - ans[i].indexOf(vword[i]);
         let finalPosition = 17 + ans[i].length-1;
         let c=0;
         let color = false;
 
         for(j=0; j<36; j++) {
-            if(j>=initPosition && j<=finalPosition && c<ans[i].length) {
-                if(ans[i][c] == vWord[i] && !color) {
+            if(j >= initPosition && j <= finalPosition && c < ans[i].length) {
+                if(ans[i][c] == vword[i] && !color) {
                     html += '<td class="table-primary" id="clueword"><input type="text" size="1" maxlength="1" readonly="readonly" value="' + ans[i][c].toUpperCase() + '" /></td>';
                     color = true;
                 } else
@@ -76,16 +78,18 @@ function setCrosswordReferences(descriptions, container) {
 function validateChar(i, c) {
     const txtName = 'txt-' + i + '-' + c ;
     const e = document.getElementById(txtName);
-    if(e.value.toUpperCase() != answers[i][c].toUpperCase()) {
-        e.classList.toggle("wrong-answer");
+    if(e.value.toUpperCase() != _answers[i][c].toUpperCase()) {
+        e.classList.remove("correct-answer");
+        e.classList.add("wrong-answer");
     }
-    if(e.value.toUpperCase() == answers[i][c].toUpperCase()) {
+    if(e.value.toUpperCase() == _answers[i][c].toUpperCase()) {
+        e.classList.remove("wrong-answer");
         e.classList.add("correct-answer");
     }
 }
 
 // Función llamadora - Principal
 function runCPuzzle() {
-    drawCrossword(vword, answers, refs);
-    setCrosswordReferences(refs,"references");
+    drawCrossword(_vword, _answers, _refs);
+    setCrosswordReferences(_refs,"references");
 }

@@ -52,7 +52,6 @@ body {
   padding-top: 10rem;
   padding-bottom: 10rem;
   background-color: var(--h);
-  overflow: scroll;
 }
 
 #mainContainer.container-fluid{
@@ -94,6 +93,10 @@ td#clueword.table-primary input{
 .correct-answer{
   font-weight: bold;
   border:none;
+}
+
+#cpuzzle {
+  overflow-x: scroll;
 }
 
 /* ===================================== FOOTER ===================================== */
