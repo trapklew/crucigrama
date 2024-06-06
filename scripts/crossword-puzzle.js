@@ -35,7 +35,7 @@ const _size = 36;
 const _half = 17;
 
 // Dibujar el crucigrama
-function drawCrossword (vword, ans) {
+function drawCrossword (vword, ans, showAnswers) {
     const container = document.getElementById('cpuzzle');
     let size = vword.length;
     let html = '<form><table class="table table-borderless">';
@@ -54,7 +54,7 @@ function drawCrossword (vword, ans) {
                     html += '<td class="table-primary" id="clueword"><input type="text" size="1" maxlength="1" readonly="readonly" value="' + ans[i][c].toUpperCase() + '" /></td>';
                     color = true;
                 } else
-                    html += '<td class="table-secondary"><input type="text" id="txt-' + i + '-' + c + '" onkeyup="validateChar(' + i + ',' + c + ')" class="form-control no-border" size="1" maxlength="1" /></td>';
+                    html += '<td class="table-secondary"><input type="text" id="txt-' + i + '-' + c + '" onkeyup="validateChar(' + i + ',' + c + ')" class="form-control no-border" size="1" maxlength="1" value="' + (showAnswers == true ? ans[i][c] : "") + '"/></td>';
                 c++;
             } else {
                 html += '<td></td>';
@@ -90,11 +90,16 @@ function validateChar(i, c) {
 
 function restart() {
     document.getElementById('cpuzzle').innerHTML = '';
-    drawCrossword(_vword, _answers);
+    drawCrossword(_vword, _answers, false);
+}
+
+function showAnswers() {
+    document.getElementById('cpuzzle').innerHTML = '';
+    drawCrossword(_vword, _answers, true);
 }
 
 // Función llamadora - Principal
 function runCPuzzle() {
-    drawCrossword(_vword, _answers);
+    drawCrossword(_vword, _answers, false);
     setCrosswordReferences(_refs, "references");
 }
