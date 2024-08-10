@@ -47,6 +47,7 @@ body {
 }
 
 /* =================================== CONTAINER =================================== */
+
 #mainContainer {
   padding-top: 10rem;
   padding-bottom: 10rem;
@@ -56,7 +57,9 @@ body {
 #mainContainer.container-fluid{
   background-color: var(--h);
 }
+
 /* ===================================== TABLE ===================================== */
+
 td.table-secondary {
   background-color: var(--e);
   border: 0.5px solid var(--d);
@@ -100,6 +103,14 @@ td#clueword.table-primary input{
 
 #cpuzzle {
   overflow-x: hidden;
+}
+
+/* ===================================== TEXTAREA ===================================== */
+
+#cpuzzle-code textarea{
+  font-family: Consolas;
+  background-color: var(--a);
+  color:var(--h);
 }
 
 /* ==================================== BUTTONS ===================================== */

@@ -24,15 +24,19 @@
 *
 * ========================================================================================
 */
-const _answers = ["literatura","marti","borges","cortazar","sabato"];
-const _vword = "libro";
-const _refs = ["Arte de la expresión verbal", 
-                "Apellido del escritor cubano iniciador del modernismo literario en Hispanoamérica.", 
-                "Apellido del escritor argentino autor de El Aleph",
-                "Apellido del escritor argentino autor de Rayuela",
-                "Apellido del escritor argentino que antes de dedicarse a la literatura existencialista, fue físico."];
-const _size = 36;
-const _half = 17;
+_answers = [];
+_vword = "";
+_refs = [];
+_size = 36; // Para libro
+_half = 17; // Para libro
+
+function preloadCrossword() {
+    var json_arr = {};
+    json_arr = JSON.parse(document.getElementById('jsonpuzzle').value);
+    _answers = json_arr[0]["answers"];
+    _vword = json_arr[0]["vword"];
+    _refs = json_arr[0]["refs"];
+}
 
 // Dibujar el crucigrama
 function drawCrossword (vword, ans, showAnswers) {
@@ -43,26 +47,32 @@ function drawCrossword (vword, ans, showAnswers) {
     for(i=0; i < ans.length; i++) {
         html += '<tr>';
         
-        let initPosition = _half - ans[i].indexOf(vword[i]);
-        let finalPosition = _half + ans[i].length - 1;
+        let initPosition = Math.max(0, _half - ans[i].indexOf(vword[i]));
+        let finalPosition = Math.min(_size - 1, _half + ans[i].length - 1);
+
         let c = 0;
         let color = false;
 
         for(j = 0; j < _size; j++) {
-            if(j >= initPosition && j <= finalPosition && c < ans[i].length) {
-                if(ans[i][c] == vword[i] && !color) {
+            console.log("initPosition "+ initPosition +", j " + j + ", finalPosition " + finalPosition + ", c " + c + ", ans[i].length " + ans[i].length);
+            
+            if(j >= initPosition && j < initPosition + ans[i].length) {
+                console.log("entra if 1, ans[i][j - initPosition] " + ans[i][j - initPosition] + ", vword[i] " + vword[i])
+                if(ans[i][j - initPosition].toLowerCase() == vword[i].toLowerCase() && !color) {
+                    console.log("entra if 2")
                     html += '<td class="table-primary" id="clueword"><input type="text" size="1" maxlength="1" readonly="readonly" value="' + ans[i][c].toUpperCase() + '" /></td>';
                     color = true;
                 } else
                     html += '<td class="table-secondary"><input type="text" id="txt-' + i + '-' + c + '" onkeyup="validateChar(' + i + ',' + c + ')" class="form-control no-border" size="1" maxlength="1" value="' + (showAnswers == true ? ans[i][c] : "") + '"/></td>';
                 c++;
             } else {
+                console.log("entra else")
                 html += '<td></td>';
             }
         }
         html += '</tr>';
     }
-    container.innerHTML += html + '</table></form>';
+    container.innerHTML = html + '</table></form>';
 }
 
 function setCrosswordReferences(descriptions, container) {
@@ -89,8 +99,9 @@ function validateChar(i, c) {
 }
 
 function restart() {
+    document.getElementById('references').innerHTML = '';
     document.getElementById('cpuzzle').innerHTML = '';
-    drawCrossword(_vword, _answers, false);
+    runCPuzzle();
 }
 
 function showAnswers() {
@@ -100,6 +111,7 @@ function showAnswers() {
 
 // Función llamadora - Principal
 function runCPuzzle() {
+    preloadCrossword();
     drawCrossword(_vword, _answers, false);
     setCrosswordReferences(_refs, "references");
 }
