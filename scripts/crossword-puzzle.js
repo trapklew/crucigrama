@@ -3,8 +3,8 @@
 *  Nombre del archivo: crossword-puzzle.js
 *  Autor: Mariela Montaldo
 *  Fecha de creación: 30/05/2024
-*  Última modificación: 06/06/2024
-*  Versión: v0.1
+*  Última modificación: 10/08/2024
+*  Versión: v0.2
 *
 *  Descripción:
 *  Este archivo contiene el código de validación y construcción del crucigrama. Dicho
@@ -14,6 +14,7 @@
 *
 *  Historial de modificaciones:
 *  - 30/05/2024: Mariela Montaldo - Creación del archivo.
+*  - 10/08/2024: Mariela Montaldo - Agrego textarea e incorporación de crucigrama JSON.
 *
 *  Copyright (c) 2024 Mariela Montaldo.
 *
@@ -27,8 +28,8 @@
 _answers = [];
 _vword = "";
 _refs = [];
-_size = 36; // Para libro
-_half = 17; // Para libro
+_size = 36;
+_half = 18;
 
 function preloadCrossword() {
     var json_arr = {};
@@ -41,32 +42,30 @@ function preloadCrossword() {
 // Dibujar el crucigrama
 function drawCrossword (vword, ans, showAnswers) {
     const container = document.getElementById('cpuzzle');
-    let size = vword.length;
     let html = '<form><table class="table table-borderless">';
     
+    // i es contador para cantidad de letras de la palabra vertical (filas del crucigrama)
     for(i=0; i < ans.length; i++) {
         html += '<tr>';
         
-        let initPosition = Math.max(0, _half - ans[i].indexOf(vword[i]));
-        let finalPosition = Math.min(_size - 1, _half + ans[i].length - 1);
+        // pos inicial y final donde se empiezan a escribir las palabras en la fila horizontal
+        let initPosition = Math.max(0, _half - ans[i].toLowerCase().indexOf(vword[i].toLowerCase()));
 
+        // c contador para letras de las palabras horizontales
         let c = 0;
         let color = false;
-
+        
+        // j contador para espacios horizontales (vacíos o con letras, es indistinto)
         for(j = 0; j < _size; j++) {
-            console.log("initPosition "+ initPosition +", j " + j + ", finalPosition " + finalPosition + ", c " + c + ", ans[i].length " + ans[i].length);
-            
             if(j >= initPosition && j < initPosition + ans[i].length) {
-                console.log("entra if 1, ans[i][j - initPosition] " + ans[i][j - initPosition] + ", vword[i] " + vword[i])
                 if(ans[i][j - initPosition].toLowerCase() == vword[i].toLowerCase() && !color) {
-                    console.log("entra if 2")
                     html += '<td class="table-primary" id="clueword"><input type="text" size="1" maxlength="1" readonly="readonly" value="' + ans[i][c].toUpperCase() + '" /></td>';
                     color = true;
-                } else
+                } else {
                     html += '<td class="table-secondary"><input type="text" id="txt-' + i + '-' + c + '" onkeyup="validateChar(' + i + ',' + c + ')" class="form-control no-border" size="1" maxlength="1" value="' + (showAnswers == true ? ans[i][c] : "") + '"/></td>';
+                }
                 c++;
             } else {
-                console.log("entra else")
                 html += '<td></td>';
             }
         }
