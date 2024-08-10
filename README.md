@@ -3,6 +3,8 @@
 
 Con esta herramienta podremos cargar la estructura deseada para armar nuestro propio **crucigrama personalizado**. El crucigrama debe respetar el **formato JSON**, con la estructura que se presenta a continuación. También, se incluye un JSON de ejemplo. Con sólo modificar los valores del JSON de ejemplo, se puede obtener un nuevo crucigrama.
 
+Accede a la herramienta [haciendo clic aquí](https://m0nt4ld0.github.io/crucigrama/).
+
 ![image](https://github.com/user-attachments/assets/d6b948e3-97ff-4738-8f10-0515ac57b297)
 
 El JSON a insertar debe contener el siguiente formato:
