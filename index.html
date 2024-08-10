@@ -29,15 +29,70 @@
     </header>
     
     <!-- Crucigrama -->
-    <div class="container-fluid" id="mainContainer">
-        <div class="container-md" id="cpuzzle"></div>
-        <form class="container-sm" id="cpuzzle-options">
-          <input type="button" class="btn btn-primary" id="btn-restart" value="Reiniciar" onclick="restart()"/>
-          <input type="button" class="btn btn-primary" id="btn-showAnswers" value="Ver Respuestas" onclick="showAnswers()"/>
+    <div 
+      class="container-fluid" 
+      id="mainContainer">
+        <div 
+          class="container-md" 
+          id="cpuzzle"></div>
+        <form 
+          class="container-sm" 
+          id="cpuzzle-options">
+          <input 
+            type="button" 
+            class="btn btn-primary" 
+            id="btn-restart" 
+            value="Reiniciar" 
+            onclick="restart()"/>
+          <input 
+            type="button" 
+            class="btn btn-primary" 
+            id="btn-showAnswers" 
+            value="Ver Respuestas" 
+            onclick="showAnswers()"/>
         </form>
         <br>
-        <div class="container-sm" id="references"></div>
+        <div 
+          class="container-sm" 
+          id="references">
+        </div>
+        <br>
+        <!-- Contenedor JSON Crucigrama -->
+        <div class="container-sm" id="crossword-code">
+          <h3>Crucigrama personalizado</h3>
+          <p>A continuación, puede modificar el contenido del crucigrama (formato JSON) y generar uno personalizado:</p>
+          <form class="container-sm" id="cpuzzle-code">
+            <textarea class="form-control" rows="10" id="jsonpuzzle">
+[
+{
+    "vword": "Freud",
+    "refs": [
+      "Antigua teoría pseudocientífica, hoy sin validez, que afirmaba poder determinar rasgos del cáracter y de la personalidad basándose en la forma del cráneo y las facciones.",
+      "Fuerza que durante el análisis «se defiende por todos los medios contra la curación y a toda costa quiere aferrarse a la enfermedad y el padecimiento»",
+      "Complejo de...",
+      "Fuente de estímulos en constante fluir, procedente de una excitación interna (a diferencia del estímulo que es externo) y está ligada a un objeto, el cual es transitorio. Su satisfacción es parcial.",
+      "Proyección, introyección, identificación proyectiva, todos estos son mecanismos de..."
+    ],
+    "answers": [
+      "frenologia",
+      "resistencia",
+      "edipo",
+      "pulsion",
+      "defensa"
+    ]
+}
+]</textarea>
+            <input 
+              type="button" 
+              class="btn btn-primary" 
+              id="btn-restart" 
+              value="Reiniciar" 
+              onclick="restart()"/>
+          </form>
+        </div>
     </div>
+    
+    
 
     <!-- Pie de página -->
     <footer>

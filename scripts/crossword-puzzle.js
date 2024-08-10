@@ -3,8 +3,8 @@
 *  Nombre del archivo: crossword-puzzle.js
 *  Autor: Mariela Montaldo
 *  Fecha de creación: 30/05/2024
-*  Última modificación: 06/06/2024
-*  Versión: v0.1
+*  Última modificación: 10/08/2024
+*  Versión: v0.2
 *
 *  Descripción:
 *  Este archivo contiene el código de validación y construcción del crucigrama. Dicho
@@ -14,6 +14,7 @@
 *
 *  Historial de modificaciones:
 *  - 30/05/2024: Mariela Montaldo - Creación del archivo.
+*  - 10/08/2024: Mariela Montaldo - Agrego textarea e incorporación de crucigrama JSON.
 *
 *  Copyright (c) 2024 Mariela Montaldo.
 *
@@ -24,37 +25,45 @@
 *
 * ========================================================================================
 */
-const _answers = ["literatura","marti","borges","cortazar","sabato"];
-const _vword = "libro";
-const _refs = ["Arte de la expresión verbal", 
-                "Apellido del escritor cubano iniciador del modernismo literario en Hispanoamérica.", 
-                "Apellido del escritor argentino autor de El Aleph",
-                "Apellido del escritor argentino autor de Rayuela",
-                "Apellido del escritor argentino que antes de dedicarse a la literatura existencialista, fue físico."];
-const _size = 36;
-const _half = 17;
+_answers = [];
+_vword = "";
+_refs = [];
+_size = 36;
+_half = 18;
+
+function preloadCrossword() {
+    var json_arr = {};
+    json_arr = JSON.parse(document.getElementById('jsonpuzzle').value);
+    _answers = json_arr[0]["answers"];
+    _vword = json_arr[0]["vword"];
+    _refs = json_arr[0]["refs"];
+}
 
 // Dibujar el crucigrama
 function drawCrossword (vword, ans, showAnswers) {
     const container = document.getElementById('cpuzzle');
-    let size = vword.length;
     let html = '<form><table class="table table-borderless">';
     
+    // i es contador para cantidad de letras de la palabra vertical (filas del crucigrama)
     for(i=0; i < ans.length; i++) {
         html += '<tr>';
         
-        let initPosition = _half - ans[i].indexOf(vword[i]);
-        let finalPosition = _half + ans[i].length - 1;
+        // pos inicial y final donde se empiezan a escribir las palabras en la fila horizontal
+        let initPosition = Math.max(0, _half - ans[i].toLowerCase().indexOf(vword[i].toLowerCase()));
+
+        // c contador para letras de las palabras horizontales
         let c = 0;
         let color = false;
-
+        
+        // j contador para espacios horizontales (vacíos o con letras, es indistinto)
         for(j = 0; j < _size; j++) {
-            if(j >= initPosition && j <= finalPosition && c < ans[i].length) {
-                if(ans[i][c] == vword[i] && !color) {
+            if(j >= initPosition && j < initPosition + ans[i].length) {
+                if(ans[i][j - initPosition].toLowerCase() == vword[i].toLowerCase() && !color) {
                     html += '<td class="table-primary" id="clueword"><input type="text" size="1" maxlength="1" readonly="readonly" value="' + ans[i][c].toUpperCase() + '" /></td>';
                     color = true;
-                } else
+                } else {
                     html += '<td class="table-secondary"><input type="text" id="txt-' + i + '-' + c + '" onkeyup="validateChar(' + i + ',' + c + ')" class="form-control no-border" size="1" maxlength="1" value="' + (showAnswers == true ? ans[i][c] : "") + '"/></td>';
+                }
                 c++;
             } else {
                 html += '<td></td>';
@@ -62,7 +71,7 @@ function drawCrossword (vword, ans, showAnswers) {
         }
         html += '</tr>';
     }
-    container.innerHTML += html + '</table></form>';
+    container.innerHTML = html + '</table></form>';
 }
 
 function setCrosswordReferences(descriptions, container) {
@@ -89,8 +98,9 @@ function validateChar(i, c) {
 }
 
 function restart() {
+    document.getElementById('references').innerHTML = '';
     document.getElementById('cpuzzle').innerHTML = '';
-    drawCrossword(_vword, _answers, false);
+    runCPuzzle();
 }
 
 function showAnswers() {
@@ -100,6 +110,7 @@ function showAnswers() {
 
 // Función llamadora - Principal
 function runCPuzzle() {
+    preloadCrossword();
     drawCrossword(_vword, _answers, false);
     setCrosswordReferences(_refs, "references");
 }
