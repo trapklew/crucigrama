@@ -15,6 +15,7 @@
 *  Historial de modificaciones:
 *  - 30/05/2024: Mariela Montaldo - Creación del archivo.
 *  - 10/08/2024: Mariela Montaldo - Agrego textarea e incorporación de crucigrama JSON.
+*  - 11/08/2024: Mariela Montaldo - Agrego impresión del crucigrama
 *
 *  Copyright (c) 2024 Mariela Montaldo.
 *
@@ -59,28 +60,28 @@ function drawCrossword (vword, ans, showAnswers) {
         for(j = 0; j < _size; j++) {
             if(j >= initPosition && j < initPosition + ans[i].length) {
                 if(ans[i][j - initPosition].toLowerCase() == vword[i].toLowerCase() && !color) {
-                    html += '<td class="table-primary" id="clueword"><input type="text" size="1" maxlength="1" readonly="readonly" value="' + ans[i][c].toUpperCase() + '" /></td>';
+                    html += `<td class="table-primary" id="clueword"><input type="text" size="1" maxlength="1" readonly="readonly" value="${ans[i][c].toUpperCase()}" /></td>`;
                     color = true;
                 } else {
-                    html += '<td class="table-secondary"><input type="text" id="txt-' + i + '-' + c + '" onkeyup="validateChar(' + i + ',' + c + ')" class="form-control no-border" size="1" maxlength="1" value="' + (showAnswers == true ? ans[i][c] : "") + '"/></td>';
+                    html += `<td class="table-secondary"><input type="text" id="txt-${i}-${c}" onkeyup="validateChar(${i},${c})" class="form-control no-border" size="1" maxlength="1" value="${(showAnswers == true ? ans[i][c] : "")}"/></td>`;
                 }
                 c++;
             } else {
-                html += '<td></td>';
+                html += `<td></td>`;
             }
         }
-        html += '</tr>';
+        html += `</tr>`;
     }
-    container.innerHTML = html + '</table></form>';
+    container.innerHTML = html + `</table></form>`;
 }
 
 function setCrosswordReferences(descriptions, container) {
     let cont = document.getElementById(container);
-    cont.innerHTML += '<h3>Referencias</h3><ol class="list-group list-group-numbered">';
+    cont.innerHTML += `<h3>Referencias</h3><ol>`;
     for(s of descriptions) {
-        cont.innerHTML += '<li class="list-group-item">' + s + '</li>';
+        cont.innerHTML += `<li style="display: list-item;">${s}</li>`;
     }
-    cont.innerHTML += '</ol>';
+    cont.innerHTML += `</ol>`;
 }
 
 function validateChar(i, c) {
@@ -101,6 +102,27 @@ function restart() {
     document.getElementById('references').innerHTML = '';
     document.getElementById('cpuzzle').innerHTML = '';
     runCPuzzle();
+    alert('¡Listo!');
+}
+
+function printCrossword() {
+    document.getElementById('references').innerHTML = '';
+    document.getElementById('cpuzzle').innerHTML = '';
+    runCPuzzle();
+    let data = `
+        <html>
+            <head>
+                <title>Crucigrama | ${((_vword) ? _vword : '')} </title>
+            </head>
+        <body>` 
+        + document.getElementById('cpuzzle').innerHTML
+        + document.getElementById('references').innerHTML
+        + ` </body>
+            </html>`;
+    const printableWindow = window.open('', '_blank');
+    printableWindow.document.write(data);
+    printableWindow.document.close();
+    printableWindow.print();
 }
 
 function showAnswers() {
