@@ -107,7 +107,7 @@ function printCrossword() {
     let data = `
         <html>
             <head>
-                <title>Crucigrama</title>
+                <title>Crucigrama` + ((_vword) ? ` | ` + _vword : ``) + ` </title>
             </head>
         <body>` 
         + document.getElementById('cpuzzle').innerHTML
