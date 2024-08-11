@@ -106,6 +106,9 @@ function restart() {
 }
 
 function printCrossword() {
+    document.getElementById('references').innerHTML = '';
+    document.getElementById('cpuzzle').innerHTML = '';
+    runCPuzzle();
     let data = `
         <html>
             <head>
