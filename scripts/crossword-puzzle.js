@@ -15,6 +15,7 @@
 *  Historial de modificaciones:
 *  - 30/05/2024: Mariela Montaldo - Creación del archivo.
 *  - 10/08/2024: Mariela Montaldo - Agrego textarea e incorporación de crucigrama JSON.
+*  - 11/08/2024: Mariela Montaldo - Agrego impresión del crucigrama
 *
 *  Copyright (c) 2024 Mariela Montaldo.
 *
@@ -101,6 +102,7 @@ function restart() {
     document.getElementById('references').innerHTML = '';
     document.getElementById('cpuzzle').innerHTML = '';
     runCPuzzle();
+    alert('¡Listo!');
 }
 
 function printCrossword() {
