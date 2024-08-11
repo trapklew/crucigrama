@@ -26,15 +26,24 @@
 *
 * ========================================================================================
 */
+
+// Declaración de variables globales
 _answers = [];
 _vword = "";
 _refs = [];
-_size = 36;
-_half = 18;
+
+// Declaración de constantes
+const CPUZZLE_CONTAINER = document.getElementById('cpuzzle');
+const REFERENCES_CONTAINER = document.getElementById('references');
+const JSONPUZZLE_INPUT = document.getElementById('jsonpuzzle');
+
+// Constantes globales
+const _SIZE = 36;
+const _HALF = 18;
 
 function preloadCrossword() {
     var json_arr = {};
-    json_arr = JSON.parse(document.getElementById('jsonpuzzle').value);
+    json_arr = JSON.parse(JSONPUZZLE_INPUT.value);
     _answers = json_arr[0]["answers"];
     _vword = json_arr[0]["vword"];
     _refs = json_arr[0]["refs"];
@@ -42,7 +51,6 @@ function preloadCrossword() {
 
 // Dibujar el crucigrama
 function drawCrossword (vword, ans, showAnswers) {
-    const container = document.getElementById('cpuzzle');
     let html = '<form><table class="table table-borderless">';
     
     // i es contador para cantidad de letras de la palabra vertical (filas del crucigrama)
@@ -50,20 +58,39 @@ function drawCrossword (vword, ans, showAnswers) {
         html += '<tr>';
         
         // pos inicial y final donde se empiezan a escribir las palabras en la fila horizontal
-        let initPosition = Math.max(0, _half - ans[i].toLowerCase().indexOf(vword[i].toLowerCase()));
+        let initPosition = Math.max(0, _HALF - ans[i].toLowerCase().indexOf(vword[i].toLowerCase()));
 
         // c contador para letras de las palabras horizontales
         let c = 0;
         let color = false;
         
         // j contador para espacios horizontales (vacíos o con letras, es indistinto)
-        for(j = 0; j < _size; j++) {
+        for(j = 0; j < _SIZE; j++) {
             if(j >= initPosition && j < initPosition + ans[i].length) {
                 if(ans[i][j - initPosition].toLowerCase() == vword[i].toLowerCase() && !color) {
-                    html += `<td class="table-primary" id="clueword"><input type="text" size="1" maxlength="1" readonly="readonly" value="${ans[i][c].toUpperCase()}" /></td>`;
+                    html += `<td 
+                                class="table-primary" 
+                                id="clueword">
+                                <input 
+                                    type="text" 
+                                    size="1" 
+                                    maxlength="1" 
+                                    readonly="readonly" 
+                                    value="${ans[i][c].toUpperCase()}" />
+                            </td>`;
                     color = true;
                 } else {
-                    html += `<td class="table-secondary"><input type="text" id="txt-${i}-${c}" onkeyup="validateChar(${i},${c})" class="form-control no-border" size="1" maxlength="1" value="${(showAnswers == true ? ans[i][c] : "")}"/></td>`;
+                    html += `<td 
+                                class="table-secondary">
+                                    <input 
+                                        type="text" 
+                                        id="txt-${i}-${c}" 
+                                        onkeyup="validateChar(${i},${c})" 
+                                        class="form-control no-border" 
+                                        size="1" 
+                                        maxlength="1" 
+                                        value="${(showAnswers == true ? ans[i][c] : "")}"/>
+                            </td>`;
                 }
                 c++;
             } else {
@@ -72,14 +99,14 @@ function drawCrossword (vword, ans, showAnswers) {
         }
         html += `</tr>`;
     }
-    container.innerHTML = html + `</table></form>`;
+    CPUZZLE_CONTAINER.innerHTML = html + `</table></form>`;
 }
 
 function setCrosswordReferences(descriptions, container) {
     let cont = document.getElementById(container);
     cont.innerHTML += `<h3>Referencias</h3><ol>`;
     for(s of descriptions) {
-        cont.innerHTML += `<li style="display: list-item;">${s}</li>`;
+        cont.innerHTML += `<li>${s}</li>`;
     }
     cont.innerHTML += `</ol>`;
 }
@@ -99,24 +126,24 @@ function validateChar(i, c) {
 }
 
 function restart() {
-    document.getElementById('references').innerHTML = '';
-    document.getElementById('cpuzzle').innerHTML = '';
+    REFERENCES_CONTAINER.innerHTML = '';
+    CPUZZLE_CONTAINER.innerHTML = '';
     runCPuzzle();
     alert('¡Listo!');
 }
 
 function printCrossword() {
-    document.getElementById('references').innerHTML = '';
-    document.getElementById('cpuzzle').innerHTML = '';
+    REFERENCES_CONTAINER.innerHTML = '';
+    CPUZZLE_CONTAINER.innerHTML = '';
     runCPuzzle();
     let data = `
         <html>
             <head>
-                <title>Crucigrama | ${((_vword) ? _vword : '')} </title>
+                <title>Crucigrama | ${((_vword) ? _vword : '')}</title>
             </head>
         <body>` 
-        + document.getElementById('cpuzzle').innerHTML
-        + document.getElementById('references').innerHTML
+        + CPUZZLE_CONTAINER.innerHTML
+        + REFERENCES_CONTAINER.innerHTML
         + ` </body>
             </html>`;
     const printableWindow = window.open('', '_blank');
@@ -126,7 +153,7 @@ function printCrossword() {
 }
 
 function showAnswers() {
-    document.getElementById('cpuzzle').innerHTML = '';
+    CPUZZLE_CONTAINER.innerHTML = '';
     drawCrossword(_vword, _answers, true);
 }
 
