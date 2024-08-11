@@ -103,6 +103,23 @@ function restart() {
     runCPuzzle();
 }
 
+function printCrossword() {
+    let data = `
+        <html>
+            <head>
+                <title>Crucigrama</title>
+            </head>
+        <body>` 
+        + document.getElementById('cpuzzle').innerHTML
+        + document.getElementById('references').innerHTML
+        + ` </body>
+            </html>`;
+    const printableWindow = window.open('', '_blank');
+    printableWindow.document.write(data);
+    printableWindow.document.close();
+    printableWindow.print();
+}
+
 function showAnswers() {
     document.getElementById('cpuzzle').innerHTML = '';
     drawCrossword(_vword, _answers, true);
