@@ -35,6 +35,7 @@ _refs = [];
 // Declaración de constantes
 const CPUZZLE_CONTAINER = document.getElementById('cpuzzle');
 const REFERENCES_CONTAINER = document.getElementById('references');
+const GENERATOR_CONTAINER = document.getElementById('cpuzzle-generator-container');
 const JSONPUZZLE_INPUT = document.getElementById('jsonpuzzle');
 
 // Constantes globales
@@ -155,6 +156,65 @@ function printCrossword() {
 function showAnswers() {
     CPUZZLE_CONTAINER.innerHTML = '';
     drawCrossword(_vword, _answers, true);
+}
+
+function generateFormLoadCustomCrossword() {
+    let VWORD_INPUT = document.getElementById('txt-vword');
+    let vword = VWORD_INPUT.value.toUpperCase();
+    if(vword) 
+    {
+        for(i = 0; i < vword.length; i++)
+        {
+            let data = `
+                <div class="row">
+                    <div class="col">
+                        <input 
+                            type="text"
+                            class="form-control"
+                            placeholder="Palabra que contenga la letra ${vword[i]} (respuesta, palabra #${i + 1})."
+                            value=""
+                            id="txt-hword-${i}">
+                    </div>
+                    <div class="col">
+                        <input 
+                            type="text"
+                            class="form-control"
+                            placeholder="Referencia para la palabra #${i + 1} que contiene la letra ${vword[i]}"
+                            value=""
+                            id="txt-refs-${i}">
+                    </div>
+                </div>
+                `;
+            GENERATOR_CONTAINER.innerHTML += data;
+        }
+        GENERATOR_CONTAINER.innerHTML +=
+        `<div class="row">
+            <div class="col">
+                <input 
+                    type="button" 
+                    class="form-control btn btn-secondary" 
+                    id="btn-jsonForm" 
+                    value="Prefiero generarlo insertando un JSON" 
+                    onclick="showJsonForm()"/>
+            </div>
+            <div class="col">
+                <input 
+                    type="button" 
+                    class="form-control btn btn-primary" 
+                    id="btn-generateForm" 
+                    value="¡Listo! Generar crucigrama" 
+                    onclick="generateCustomCrossword()"/>
+            </div>
+        </div>`;
+    } else {
+        alert('Algo no anduvo bien... ¿Cargaste la palabra vertical?');
+        VWORD_INPUT.focus();
+    }
+}
+
+function showJsonForm() {
+    const jform = document.getElementById('crossword-code');
+    jform.style.visibility = "visible" ;
 }
 
 // Función llamadora - Principal

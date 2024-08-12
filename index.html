@@ -78,7 +78,7 @@
 
         <br>
         <!-- Contenedor Crucigrama Personalizado -->
-        <div class="container-sm" id="crossword-code">
+        <div class="container-sm">
           <h3>Crucigrama personalizado</h3>
           <p>A continuación, puede modificar el contenido del crucigrama (formato JSON) y generar uno personalizado:</p>
           <!-- Formulario para crear crucigrama -->
@@ -91,6 +91,7 @@
                     type="text"
                     class="form-control"
                     placeholder="Palabra vertical (pista)"
+                    value="FREUD"
                     id="txt-vword"
                     aria-describedby="crosswordsGenBlock">
                 <small 
@@ -103,15 +104,22 @@
                   <input 
                       type="button" 
                       class="form-control btn btn-primary" 
-                      id="btn-restart" 
+                      id="btn-loadGenForm" 
                       value="🚀 ¡Vamos!" 
                       onclick="generateFormLoadCustomCrossword()"/>
               </div>
             </div>
+            <div id="cpuzzle-generator-container">
+            </div>
           </form>
           
           <br>
+        </div>  
           <!-- Formulario para crear crucigrama con JSON -->
+        <div
+          class="container-sm"
+          id="crossword-code"
+          style="visibility: hidden;">
           <form 
             class="container-sm" 
             id="cpuzzle-code">
@@ -148,8 +156,6 @@
         </div>
     </div>
     
-    
-
     <!-- Pie de página -->
     <footer>
       2024 - Mariela Montaldo.
