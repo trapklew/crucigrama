@@ -75,11 +75,43 @@
           class="container-sm" 
           id="references">
         </div>
+
         <br>
-        <!-- Contenedor JSON Crucigrama -->
+        <!-- Contenedor Crucigrama Personalizado -->
         <div class="container-sm" id="crossword-code">
           <h3>Crucigrama personalizado</h3>
           <p>A continuación, puede modificar el contenido del crucigrama (formato JSON) y generar uno personalizado:</p>
+          <!-- Formulario para crear crucigrama -->
+          <form 
+              class="container-sm" 
+              id="cpuzzle-custom">
+            <div class="row">
+              <div class="col">
+                <input 
+                    type="text"
+                    class="form-control"
+                    placeholder="Palabra vertical (pista)"
+                    id="txt-vword"
+                    aria-describedby="crosswordsGenBlock">
+                <small 
+                  id="crosswordsGenBlock" 
+                  class="form-text text-muted">
+                  En el crucigrama de ejemplo, la palabra vertical es "FREUD".
+                </small>
+              </div>
+              <div class="col">
+                  <input 
+                      type="button" 
+                      class="form-control btn btn-primary" 
+                      id="btn-restart" 
+                      value="🚀 ¡Vamos!" 
+                      onclick="generateFormLoadCustomCrossword()"/>
+              </div>
+            </div>
+          </form>
+          
+          <br>
+          <!-- Formulario para crear crucigrama con JSON -->
           <form 
             class="container-sm" 
             id="cpuzzle-code">
