@@ -57,7 +57,6 @@ function drawCrossword (vword, ans, showAnswers) {
     // i es contador para cantidad de letras de la palabra vertical (filas del crucigrama)
     for(i=0; i < ans.length; i++) {
         html += '<tr>';
-        
         // pos inicial y final donde se empiezan a escribir las palabras en la fila horizontal
         let initPosition = Math.max(0, _HALF - ans[i].toLowerCase().indexOf(vword[i].toLowerCase()));
 
@@ -129,14 +128,29 @@ function validateChar(i, c) {
 function restart() {
     REFERENCES_CONTAINER.innerHTML = '';
     CPUZZLE_CONTAINER.innerHTML = '';
-    runCPuzzle();
+    drawCrossword(_vword, _answers, false);
+    setCrosswordReferences(_refs, "references");
+    alert('¡Listo!');
+}
+
+function loadFromJSON() {
+    var json_arr = {};
+    json_arr = JSON.parse(JSONPUZZLE_INPUT.value);
+    _answers = json_arr[0]["answers"];
+    _vword = json_arr[0]["vword"];
+    _refs = json_arr[0]["refs"];
+    REFERENCES_CONTAINER.innerHTML = '';
+    CPUZZLE_CONTAINER.innerHTML = '';
+    drawCrossword(_vword, _answers, false);
+    setCrosswordReferences(_refs, "references");
     alert('¡Listo!');
 }
 
 function printCrossword() {
     REFERENCES_CONTAINER.innerHTML = '';
     CPUZZLE_CONTAINER.innerHTML = '';
-    runCPuzzle();
+    drawCrossword(_vword, _answers, false);
+    setCrosswordReferences(_refs, "references");
     let data = `
         <html>
             <head>
@@ -217,9 +231,27 @@ function showJsonForm() {
     jform.style.visibility = "visible" ;
 }
 
+function generateCustomCrossword() {
+    let VWORD_INPUT = document.getElementById('txt-vword');
+    let vword = VWORD_INPUT.value.toUpperCase();
+    _vword = vword;
+    _answers = [];
+    _refs = [];
+    for(i = 0; i < vword.length; i++)
+    {
+        let ans = document.getElementById(`txt-hword-${i}`).value.toLowerCase();
+        let ref = document.getElementById(`txt-refs-${i}`).value;
+        _answers.push(ans);
+        _refs.push(ref);
+    }
+    drawCrossword(vword, _answers, false);
+    REFERENCES_CONTAINER.innerHTML = '';
+    setCrosswordReferences(_refs, "references");
+}
+
 // Función llamadora - Principal
 function runCPuzzle() {
-    preloadCrossword();
+    preloadCrossword(); // Cambiar esto al inicio, a la carga del documento x 1ra vez
     drawCrossword(_vword, _answers, false);
     setCrosswordReferences(_refs, "references");
 }
