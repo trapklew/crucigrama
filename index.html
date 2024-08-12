@@ -75,11 +75,53 @@
           class="container-sm" 
           id="references">
         </div>
+
         <br>
-        <!-- Contenedor JSON Crucigrama -->
-        <div class="container-sm" id="crossword-code">
+        <!-- Contenedor Crucigrama Personalizado -->
+        <div class="container-sm">
           <h3>Crucigrama personalizado</h3>
-          <p>A continuación, puede modificar el contenido del crucigrama (formato JSON) y generar uno personalizado:</p>
+          <p>A continuación, podés generar tu propio crucigrama, con las palabras que vos elijas.
+            <br>Primero, ingresá cuál va a ser la palabra a mostrar de manera vertical:
+          </p>
+          <!-- Formulario para crear crucigrama -->
+          <form 
+              class="container-sm" 
+              id="cpuzzle-custom">
+            <div class="row">
+              <div class="col">
+                <input 
+                    type="text"
+                    class="form-control"
+                    placeholder="Palabra vertical (pista)"
+                    value="FREUD"
+                    id="txt-vword"
+                    aria-describedby="crosswordsGenBlock">
+                <small 
+                  id="crosswordsGenBlock" 
+                  class="form-text text-muted">
+                  En el crucigrama de ejemplo, la palabra vertical es "FREUD".
+                </small>
+              </div>
+              <div class="col">
+                  <input 
+                      type="button" 
+                      class="form-control btn btn-primary" 
+                      id="btn-loadGenForm" 
+                      value="🚀 ¡Vamos!" 
+                      onclick="generateFormLoadCustomCrossword()"/>
+              </div>
+            </div>
+            <div id="cpuzzle-generator-container">
+            </div>
+          </form>
+          
+          <br>
+        </div>  
+          <!-- Formulario para crear crucigrama con JSON -->
+        <div
+          class="container-sm"
+          id="crossword-code"
+          style="visibility: hidden;">
           <form 
             class="container-sm" 
             id="cpuzzle-code">
@@ -111,13 +153,11 @@
               class="btn btn-primary" 
               id="btn-restart" 
               value="🚀 Cargar" 
-              onclick="restart()"/>
+              onclick="loadFromJSON()"/>
           </form>
         </div>
     </div>
     
-    
-
     <!-- Pie de página -->
     <footer>
       2024 - Mariela Montaldo.
