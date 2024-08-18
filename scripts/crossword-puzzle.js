@@ -52,7 +52,10 @@ function preloadCrossword() {
 
 // Dibujar el crucigrama
 function drawCrossword (vword, ans, showAnswers) {
-    let html = '<form><table class="table table-borderless">';
+    let html = `
+        <form>
+            <table 
+                class="table table-borderless">`;
     
     // i es contador para cantidad de letras de la palabra vertical (filas del crucigrama)
     for(i=0; i < ans.length; i++) {
@@ -114,6 +117,11 @@ function setCrosswordReferences(descriptions, container) {
 function validateChar(i, c) {
     const txtName = 'txt-' + i + '-' + c ;
     const e = document.getElementById(txtName);
+    const esLetra = /^[A-Za-z]$/;
+    if (!esLetra.test(c)) {
+        e.value = '';
+        return;
+    }
     if(e.value.toUpperCase() != _answers[i][c].toUpperCase()) {
         e.classList.remove("correct-answer");
         e.classList.add("wrong-answer");
