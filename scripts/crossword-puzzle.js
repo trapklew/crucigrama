@@ -31,6 +31,7 @@
 _answers = [];
 _vword = "";
 _refs = [];
+_form = false; //Variable para marcar formulario de generacion de crucigrama como impreso
 
 // Declaración de constantes
 const CPUZZLE_CONTAINER = document.getElementById('cpuzzle');
@@ -185,6 +186,10 @@ function generateFormLoadCustomCrossword(vword) {
     vword = VWORD_INPUT.value.toUpperCase(); // Usa la variable `vword` de la entrada
     if(vword) 
     {
+        if(_form) //Para verificar si el formulario fue impreso antes
+        {
+            GENERATOR_CONTAINER.innerHTML = '';
+        }
         for (let i = 0; i < vword.length; i++)
         {
             let data = `
@@ -228,9 +233,13 @@ function generateFormLoadCustomCrossword(vword) {
                     onclick="generateCustomCrossword()"/>
             </div>
         </div>`;
+        _form = true;
     } else {
         alert('Algo no anduvo bien... ¿Cargaste la palabra vertical?');
         VWORD_INPUT.focus();
+        //Para hacer clean del formulario si se intenta crear uno son una VWORD
+        GENERATOR_CONTAINER.innerHTML = '';
+        _form = false;
     }
 }
 
