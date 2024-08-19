@@ -180,12 +180,12 @@ function showAnswers() {
     drawCrossword(_vword, _answers, true);
 }
 
-function generateFormLoadCustomCrossword() {
+function generateFormLoadCustomCrossword(vword) {
     let VWORD_INPUT = document.getElementById('txt-vword');
-    let vword = VWORD_INPUT.value.toUpperCase();
+    vword = VWORD_INPUT.value.toUpperCase(); // Usa la variable `vword` de la entrada
     if(vword) 
     {
-        for(i = 0; i < vword.length; i++)
+        for (let i = 0; i < vword.length; i++)
         {
             let data = `
                 <div class="row">
@@ -217,7 +217,7 @@ function generateFormLoadCustomCrossword() {
                     class="form-control btn btn-secondary" 
                     id="btn-jsonForm" 
                     value="Prefiero generarlo insertando un JSON" 
-                    onclick="showJsonForm()"/>
+                    onclick="showJsonForm('${vword}')"/>
             </div>
             <div class="col">
                 <input 
@@ -235,6 +235,8 @@ function generateFormLoadCustomCrossword() {
 }
 
 function showJsonForm() {
+    var vword = document.getElementById('txt-vword').value.toUpperCase();
+    jsCreator(vword);
     const jform = document.getElementById('crossword-code');
     jform.style.visibility = "visible" ;
 }
@@ -262,4 +264,32 @@ function runCPuzzle() {
     preloadCrossword(); // Cambiar esto al inicio, a la carga del documento x 1ra vez
     drawCrossword(_vword, _answers, false);
     setCrosswordReferences(_refs, "references");
+}
+
+// Funcion Generador JSON Base
+function jsCreator(vword) {
+    var refs = [];
+    var answers = [];
+    var cntPal = vword.length;
+
+    // Llenar los arrays con "Referencia X" y "Palabra X" dependiendo de la longitud de la palabra
+    for (var i = 0; i < cntPal; i++) {
+        refs.push("Referencia " + (i + 1));
+        answers.push("Palabra " + (i + 1));
+    }
+
+    // Crear el objeto JSON
+    var result = [
+        {
+            "vword": vword,
+            "refs": refs,
+            "answers": answers
+        }
+    ];
+
+    // Convertir el JSON a cadena formateada
+    var jsonString = JSON.stringify(result, null, 2);
+
+    // Asignar el JSON formateado al contenido del textarea
+    document.getElementById('jsonpuzzle').value = jsonString;
 }
