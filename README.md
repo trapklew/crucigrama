@@ -1,13 +1,13 @@
 # Crucigrama
 
 ## **Índice**
-- Español
-- Inglés
+- [Español 🇪🇸](#crucigrama-🇪🇸)
+- [Inglés](#-Crossword)
 
-## **Índice**
-- [Generar tu propio crucigrama](#generar-tu-propio-crucigrama)
+## **Crucigrama 🇪🇸 **
+- [Generar tu propio crucigrama](#generar-tu-propio-crucigrama-💡)
 - [Generar tu propio crucigrama utilizando un JSON](#generar-tu-propio-crucigrama-utilizando-un-json)
-- [Imprimir el crucigrama](#imprimir-el-crucigrama)
+- [Imprimir el crucigrama](#imprimir-el-crucigrama-🖨️)
 
 ### **Generar tu propio crucigrama** 💡
 
@@ -76,8 +76,6 @@ Se abre la siguiente página, para la impresión. En el cuadro de selección de 
 ![image](https://github.com/user-attachments/assets/12a88238-b609-42be-a203-69f1f96f4de0)
 
 ---
-**Here the english reference started.**
-
 # Crossword
 ### **Generate your own crossword** 💡
 
