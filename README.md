@@ -1,5 +1,30 @@
 # Crucigrama
-## **Generar tu propio crucigrama** 💡
+
+## **Índice**
+- Español
+- Inglés
+
+## **Índice**
+- [Generar tu propio crucigrama](#generar-tu-propio-crucigrama)
+- [Generar tu propio crucigrama utilizando un JSON](#generar-tu-propio-crucigrama-utilizando-un-json)
+- [Imprimir el crucigrama](#imprimir-el-crucigrama)
+
+### **Generar tu propio crucigrama** 💡
+
+Escribir la palabra que se deberá mostrar de forma vertical y, a continuación, hacer clic en el botón **🚀¡Vamos!**
+
+![image](https://github.com/user-attachments/assets/98f0cb78-671c-40be-9a90-c68a7f5fdb4d)
+
+Se van a desplegar dos cuadros de texto por cada letra de la palabra:
+
+![image](https://github.com/user-attachments/assets/3caaa2f5-36b9-478e-be74-3a785afb53c3)
+
+- A la _izquierda_, vamos a ingresar cuál es la _palabra_ que debemos adivinar (la respuesta).
+- A la _derecha_, vamos a ingresar la _descripción_, que funcionará como pista.
+
+También se puede [generar tu propio crucigrama utilizando un JSON](#generar-tu-propio-crucigrama-utilizando-un-json), en lugar de ingresar manualmente cada palabra y su descripción.
+
+### **Generar tu propio crucigrama utilizando un JSON**
 
 Con esta herramienta podremos cargar la estructura deseada para armar nuestro propio **crucigrama personalizado**. El crucigrama debe respetar el **formato JSON**, con la estructura que se presenta a continuación. También, se incluye un JSON de ejemplo. Con sólo modificar los valores del JSON de ejemplo, se puede obtener un nuevo crucigrama.
 
@@ -40,7 +65,7 @@ Este JSON dará lugar al siguiente crucigrama:
 
 ![image](https://github.com/user-attachments/assets/c9478e37-1f0a-4a0e-9260-5c45e713d6e3)
 
-## **Imprimir el crucigrama** 🖨️
+### **Imprimir el crucigrama** 🖨️
 Una vez cargado el crucigrama personalizado, podremos imprimirlo haciendo clic en el botón correspondiente. Nos va a abrir una nueva página en blanco, con el crucigrama para completarlo y sus referencias. Podemos imprimirlo, o guardarlo en nuestro equipo como un documento PDF.
 
 Clic en el botón **Imprimir**
@@ -54,7 +79,7 @@ Se abre la siguiente página, para la impresión. En el cuadro de selección de 
 **Here the english reference started.**
 
 # Crossword
-## **Generate your own crossword** 💡
+### **Generate your own crossword** 💡
 
 With this tool we can load the desired structure to create our own **personalized crossword**. The crossword must respect the **JSON format**, with the structure presented below. Also, an example JSON is included. By simply modifying the values ​​of the example JSON, you can obtain a new crossword puzzle.
 
@@ -95,7 +120,7 @@ This JSON will result in the following crossword puzzle:
 
 ![image](https://github.com/user-attachments/assets/c9478e37-1f0a-4a0e-9260-5c45e713d6e3)
 
-## **Print the crossword** 🖨️
+### **Print the crossword** 🖨️
 Once the personalized crossword puzzle is loaded, we can print it by clicking on the corresponding button. It will open a new blank page, with the crossword puzzle to complete and its references. We can print it, or save it on our computer as a PDF document.
 
 Click on the **Print** button
