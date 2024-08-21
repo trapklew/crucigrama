@@ -28,16 +28,21 @@
 */
 
 // Declaración de variables globales
+
 _answers = [];
 _vword = "";
 _refs = [];
-_form = false; //Variable para marcar formulario de generacion de crucigrama como impreso
+_form = false;
+numberOfInputs  = 0 ;
+correctAnswers = 0 ;
+ //Variable para marcar formulario de generacion de crucigrama como impreso
 
 // Declaración de constantes
 const CPUZZLE_CONTAINER = document.getElementById('cpuzzle');
 const REFERENCES_CONTAINER = document.getElementById('references');
 const GENERATOR_CONTAINER = document.getElementById('cpuzzle-generator-container');
 const JSONPUZZLE_INPUT = document.getElementById('jsonpuzzle');
+
 
 // Constantes globales
 const _SIZE = 36;
@@ -84,17 +89,20 @@ function drawCrossword (vword, ans, showAnswers) {
                             </td>`;
                     color = true;
                 } else {
+
                     html += `<td 
-                                class="table-secondary">
-                                    <input 
-                                        type="text" 
-                                        id="txt-${i}-${c}" 
-                                        onkeyup="validateChar(${i},${c})" 
-                                        class="form-control no-border" 
-                                        size="1" 
-                                        maxlength="1" 
-                                        value="${(showAnswers == true ? ans[i][c] : "")}"/>
-                            </td>`;
+            class="table-secondary">
+            <input 
+                type="text" 
+                id="txt-${i}-${c}" 
+                onkeyup="validateChar(${i},${c})" 
+                class="form-control no-border" 
+                size="1" 
+                maxlength="1" 
+                value="${(showAnswers == true ? ans[i][c] : "")}"/>
+        </td>`;
+        numberOfInputs++;
+        // console.log("num of inputs :"+numberOfInputs);
                 }
                 c++;
             } else {
@@ -116,8 +124,10 @@ function setCrosswordReferences(descriptions, container) {
 }
 
 function validateChar(i, c) {
+ 
     const txtName = 'txt-' + i + '-' + c ;
     const e = document.getElementById(txtName);
+
     if(e.value.toUpperCase() != _answers[i][c].toUpperCase()) {
         e.classList.remove("correct-answer");
         e.classList.add("wrong-answer");
@@ -125,9 +135,42 @@ function validateChar(i, c) {
     if(e.value.toUpperCase() == _answers[i][c].toUpperCase()) {
         e.classList.remove("wrong-answer");
         e.classList.add("correct-answer");
+        correctAnswers++;
+        returnVal();
+        console.log(correctAnswers);
         e.disabled = true;
     }
+    if (checkIfAllCorrect()) {
+        setTimeout(() => {
+            const modalHtml = `
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Congratulations</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    You have successfully completed the puzzle
+                  </div>
+                  
+                </div>
+              </div>
+            </div>`;
+            
+           
+            document.body.insertAdjacentHTML('beforeend', modalHtml);
+    
+            $('#exampleModal').modal('show');
+        }, 50);
+    }
+    
+
 }
+  
+
 
 function restart() {
     REFERENCES_CONTAINER.innerHTML = '';
@@ -136,6 +179,21 @@ function restart() {
     setCrosswordReferences(_refs, "references");
     alert('¡Listo!');
 }
+
+function checkIfAllCorrect() {
+    for (let i = 0; i < _answers.length; i++) {
+        for (let c = 0; c < _answers[i].length; c++) {
+            const txtName = 'txt-' + i + '-' + c;
+            const e = document.getElementById(txtName);
+            if (e && e.value.toUpperCase() !== _answers[i][c].toUpperCase()) {
+                return false;  
+            }
+        }
+    }
+    return true;  
+}
+
+
 
 function loadFromJSON() {
     var json_arr = {};
@@ -148,6 +206,18 @@ function loadFromJSON() {
     drawCrossword(_vword, _answers, false);
     setCrosswordReferences(_refs, "references");
     alert('¡Listo!');
+}
+
+function returnVal(){
+
+    $('.progress-bar').css(
+        {
+            "width":(correctAnswers/numberOfInputs)*100+"%"
+        }
+    );
+
+    // return correctAnswers ;
+
 }
 
 function printCrossword() {
@@ -294,6 +364,15 @@ function jsCreator(vword) {
     // Convertir el JSON a cadena formateada
     var jsonString = JSON.stringify(result, null, 2);
 
+    setTimeout(()=>{
+        console.log("num of inputs :"+numberOfInputs);
+
+    } , 10)
+
     // Asignar el JSON formateado al contenido del textarea
     document.getElementById('jsonpuzzle').value = jsonString;
 }
+
+{/* <div class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+  <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 75%"></div>
+</div> */}
