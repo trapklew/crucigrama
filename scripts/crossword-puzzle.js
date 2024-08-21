@@ -158,10 +158,9 @@ function validateChar(i, c) {
               </div>
             </div>`;
             
-            // Inject the HTML into the body
+           
             document.body.insertAdjacentHTML('beforeend', modalHtml);
     
-            // Trigger the modal to show
             $('#exampleModal').modal('show');
         }, 50);
     }
