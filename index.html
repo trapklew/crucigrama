@@ -23,6 +23,7 @@
       href="./images/icons8-crossword-64.png" 
       type="image/x-icon">
   </head>
+  
   <body onload="runCPuzzle()">
       
     <!-- Barra de navegación -->
@@ -46,6 +47,20 @@
     <div 
       class="container-fluid" 
       id="mainContainer">
+
+      <div class="d-flex flex-column">
+        <div class="d-flex justify-content-center"><h2>Crossword Completion Progress</h2></div>
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="progress" style="width: 60%;">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Animated striped example" style="width: 0%;" aria-valuenow="21" aria-valuemin="0" aria-valuemax="35"></div>
+            </div>
+        </div>
+    </div>
+    
+      
+      
+
+      <div class="m-2"></div>
         <div 
           class="container-md" 
           id="cpuzzle"></div>

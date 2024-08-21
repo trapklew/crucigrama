@@ -32,7 +32,10 @@
 _answers = [];
 _vword = "";
 _refs = [];
-_form = false; //Variable para marcar formulario de generacion de crucigrama como impreso
+_form = false;
+numberOfInputs  = 0 ;
+correctAnswers = 0 ;
+ //Variable para marcar formulario de generacion de crucigrama como impreso
 
 // Declaración de constantes
 const CPUZZLE_CONTAINER = document.getElementById('cpuzzle');
@@ -98,6 +101,8 @@ function drawCrossword (vword, ans, showAnswers) {
                 maxlength="1" 
                 value="${(showAnswers == true ? ans[i][c] : "")}"/>
         </td>`;
+        numberOfInputs++;
+        // console.log("num of inputs :"+numberOfInputs);
                 }
                 c++;
             } else {
@@ -136,6 +141,9 @@ function validateChar(i, c) {
     if(e.value.toUpperCase() == _answers[i][c].toUpperCase()) {
         e.classList.remove("wrong-answer");
         e.classList.add("correct-answer");
+        correctAnswers++;
+        returnVal();
+        console.log(correctAnswers);
         e.disabled = true;
     }
     if (checkIfAllCorrect()) {
@@ -204,6 +212,18 @@ function loadFromJSON() {
     drawCrossword(_vword, _answers, false);
     setCrosswordReferences(_refs, "references");
     alert('¡Listo!');
+}
+
+function returnVal(){
+
+    $('.progress-bar').css(
+        {
+            "width":(correctAnswers/numberOfInputs)*100+"%"
+        }
+    );
+
+    // return correctAnswers ;
+
 }
 
 function printCrossword() {
@@ -350,6 +370,15 @@ function jsCreator(vword) {
     // Convertir el JSON a cadena formateada
     var jsonString = JSON.stringify(result, null, 2);
 
+    setTimeout(()=>{
+        console.log("num of inputs :"+numberOfInputs);
+
+    } , 10)
+
     // Asignar el JSON formateado al contenido del textarea
     document.getElementById('jsonpuzzle').value = jsonString;
 }
+
+{/* <div class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+  <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 75%"></div>
+</div> */}
