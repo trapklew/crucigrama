@@ -35,6 +35,7 @@ _refs = [];
 _form = false;
 numberOfInputs  = 0 ;
 correctAnswers = 0 ;
+originalColors = {};
  //Variable para marcar formulario de generacion de crucigrama como impreso
 
 // Declaración de constantes
@@ -376,3 +377,108 @@ function jsCreator(vword) {
 {/* <div class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
   <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 75%"></div>
 </div> */}
+
+// Funcionamiento de la configuracion de colores
+
+document.addEventListener('DOMContentLoaded', () => {
+    const rootStyles = getComputedStyle(document.documentElement);
+    originalColors = {
+        '--c': rootStyles.getPropertyValue('--c').trim(),
+        '--d': rootStyles.getPropertyValue('--d').trim(),
+        '--e': rootStyles.getPropertyValue('--e').trim(),
+        '--f': rootStyles.getPropertyValue('--f').trim(),
+        '--h': rootStyles.getPropertyValue('--h').trim(),
+    };
+
+    // Define el HTML del modal como una cadena
+    const modalConfigHTML = `
+        <div class="modal fade" id="configurationModal" tabindex="-1" data-bs-backdrop="static"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">🔩 Configuración</h1>
+            </div>
+            <div class="modal-body">
+                <form class="form" id="colorForm">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                    <label for="colorC" class="form-label">Palabra vertical:</label>
+                    <input type="color" class="form-control form-control-color w-100" id="colorC" name="colorC"
+                        value="#3C096C">
+                    </div>
+                    <div class="col-md-6">
+                    <label for="colorD" class="form-label">Borde de las celdas:</label>
+                    <input type="color" class="form-control form-control-color w-100" id="colorD" name="colorD"
+                        value="#5A189A">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                    <label for="colorE" class="form-label">Celdas vacías:</label>
+                    <input type="color" class="form-control form-control-color w-100" id="colorE" name="colorE"
+                        value="#7B2CBF">
+                    </div>
+                    <div class="col-md-6">
+                    <label for="colorF" class="form-label">Palabra correcta/hover:</label>
+                    <input type="color" class="form-control form-control-color w-100" id="colorF" name="colorF"
+                        value="#9D4EDD">
+                    </div>
+                </div>
+                </form>
+            </div>
+            <div class="modal-footer d-flex justify-content-evenly align-items-center">
+                <button type="button" class="btn btn-primary d-flex align-items-center" onclick="reiniciarColores()">
+                🔄 Reiniciar valores
+                </button>
+                <button type="button" class="btn btn-primary d-flex align-items-center" onclick="saveColors()">
+                💽 Guardar cambios
+                </button>
+            </div>
+            </div>
+        </div>
+        </div>
+        `;
+
+    // Inserta el modal en el cuerpo del documento
+    document.body.insertAdjacentHTML('beforeend', modalConfigHTML);
+
+});
+
+function updateColorVariable(varName, colorValue) {
+    document.documentElement.style.setProperty(varName, colorValue);
+}
+
+document.querySelectorAll('input[type="color"]').forEach(input => {
+    input.addEventListener('input', (e) => {
+        const colorVar = '--' + e.target.name.replace('color', '').toLowerCase();
+        updateColorVariable(colorVar, e.target.value);
+    });
+});
+
+function saveColors() {
+    const form = document.getElementById('colorForm');
+    const formData = new FormData(form);
+
+    formData.forEach((value, key) => {
+        const colorVar = '--' + key.replace('color', '').toLowerCase();
+        updateColorVariable(colorVar, value);
+    });
+
+    const modal = document.getElementById('configurationModal');
+    const modalInstance = bootstrap.Modal.getInstance(modal);
+    modalInstance.hide();
+}
+
+function reiniciarColores() {
+    for (const varName in originalColors) {
+        document.documentElement.style.setProperty(varName, originalColors[varName]);
+    }
+
+    document.querySelectorAll('input[type="color"]').forEach(input => {
+        const colorVar = '--' + input.name.replace('color', '').toLowerCase();
+        input.value = originalColors[colorVar];
+    });
+
+    document.getElementById('return-container').style.display = 'none';
+}
