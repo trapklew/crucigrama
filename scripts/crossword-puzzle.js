@@ -128,17 +128,21 @@ function validateChar(i, c) {
  
     const txtName = 'txt-' + i + '-' + c ;
     const e = document.getElementById(txtName);
-
-    if(e.value.toUpperCase() != _answers[i][c].toUpperCase()) {
+    const secondaryCells = document.querySelectorAll('#cpuzzle .table-secondary input');
+    //Removes the error condition if the cell value is emptied
+    e.value==="" ?e.classList.remove("wrong-answer") :null;
+    if(e.value !== "" && e.value.toUpperCase() != _answers[i][c].toUpperCase()) {
         e.classList.remove("correct-answer");
         e.classList.add("wrong-answer");
     }
-    if(e.value.toUpperCase() == _answers[i][c].toUpperCase()) {
+    if(e.value !== "" && e.value.toUpperCase() == _answers[i][c].toUpperCase()) {
         e.classList.remove("wrong-answer");
         e.classList.add("correct-answer");
         correctAnswers++;
         returnVal();
         console.log(correctAnswers);
+        //Move focus to the next cell
+        secondaryCells[[...secondaryCells].indexOf(e)+1] ?.focus();
         e.disabled = true;
     }
     if (checkIfAllCorrect()) {
@@ -482,3 +486,30 @@ function reiniciarColores() {
 
     document.getElementById('return-container').style.display = 'none';
 }
+
+document.addEventListener('keydown', e => {
+    const pressedKey = e.code;
+    const directionKeys = ['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'];
+    const focusedElement = document.activeElement;
+    const secondaryCells = document.querySelectorAll('#cpuzzle .table-secondary input');
+    const cells = document.querySelectorAll('#cpuzzle td');
+    //Discern if pressed key is directional and check if currently focused element is inside the div with id 'cpuzzle'
+    if(directionKeys.includes(pressedKey) && CPUZZLE_CONTAINER.contains(focusedElement)) {
+        //Prevent document scrolling
+        e.preventDefault();
+        //Move focus to the corresponding adjacent element based on the pressed key
+        if(pressedKey==='ArrowLeft') {
+            secondaryCells[[...secondaryCells].indexOf(focusedElement)-1] ?.focus();
+        } else if (pressedKey==='ArrowRight') {
+            secondaryCells[[...secondaryCells].indexOf(focusedElement)+1] ?.focus();
+        } else if (pressedKey==='ArrowDown' &&
+            [...cells].indexOf(focusedElement.parentElement)+36<cells.length &&
+            cells[[...cells].indexOf(focusedElement.parentElement)+36].querySelector(`input`)) {
+            cells[[...cells].indexOf(focusedElement.parentElement)+36] ?.firstElementChild.focus();
+        } else if (pressedKey==='ArrowUp' &&
+            [...cells].indexOf(focusedElement.parentElement)-36>=0 &&
+            cells[[...cells].indexOf(focusedElement.parentElement)-36].querySelector(`input`)) {
+            cells[[...cells].indexOf(focusedElement.parentElement)-36]?.firstElementChild.focus();
+        }
+    }
+})
