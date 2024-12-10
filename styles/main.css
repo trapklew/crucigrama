@@ -40,6 +40,7 @@ body {
   position: fixed;
   top: 0px;
   z-index: 10000;
+  display: flex;
 }
 
 .navbar.bg-body-tertiary {
@@ -156,3 +157,19 @@ footer a {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--c);
 }
+
+/* ==================================== NAVBAR LANGUAGE CONTAINER  =================================== */
+
+.langauge-selection {
+  margin-right: 20px;
+}
+
+.language-btn {
+  background-color: white;
+  color: black;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
