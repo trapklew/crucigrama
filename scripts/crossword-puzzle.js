@@ -117,7 +117,7 @@ function drawCrossword (vword, ans, showAnswers) {
 
 function setCrosswordReferences(descriptions, container) {
     let cont = document.getElementById(container);
-    cont.innerHTML += `<h3>Referencias</h3><ol>`;
+    cont.innerHTML += `<h3 data-i18n="references_title">Referencias</h3><ol>`;
     for(s of descriptions) {
         cont.innerHTML += `<li>${s}</li>`;
     }
@@ -251,15 +251,30 @@ function showAnswers() {
     drawCrossword(_vword, _answers, true);
 }
 
-function generateFormLoadCustomCrossword(vword) {
+function generateFormLoadCustomCrossword(placeholder_translation) {
     let VWORD_INPUT = document.getElementById('txt-vword');
-    vword = VWORD_INPUT.value.toUpperCase(); // Usa la variable `vword` de la entrada
+    let vword = VWORD_INPUT.value.toUpperCase(); // Usa la variable `vword` de la entrada
     if(vword) 
     {
         if(_form) //Para verificar si el formulario fue impreso antes
         {
             GENERATOR_CONTAINER.innerHTML = '';
         }
+
+        // Delcaration of place holder text with fallback text.
+        let leftPlaceholderOne = "Palabra que contenga la letra";
+        let leftPlaceholderTwo = "respuesta, palabra #";
+
+        let rightPlaceholderOne = "Referencia pzara la palabra #";
+        let rightPlaceholderTwo = "que contiene la letra";
+
+        // Updates the placeholder text with the passed translation text
+        leftPlaceholderOne = placeholder_translation[0];
+        leftPlaceholderTwo = placeholder_translation[1];
+        rightPlaceholderOne = placeholder_translation[2];
+        rightPlaceholderTwo = placeholder_translation[3];
+
+
         for (let i = 0; i < vword.length; i++)
         {
             let data = `
@@ -268,7 +283,7 @@ function generateFormLoadCustomCrossword(vword) {
                         <input 
                             type="text"
                             class="form-control"
-                            placeholder="Palabra que contenga la letra ${vword[i]} (respuesta, palabra #${i + 1})."
+                            placeholder="${leftPlaceholderOne} ${vword[i]} (${leftPlaceholderTwo}${i + 1})."
                             value=""
                             id="txt-hword-${i}">
                     </div>
@@ -276,7 +291,7 @@ function generateFormLoadCustomCrossword(vword) {
                         <input 
                             type="text"
                             class="form-control"
-                            placeholder="Referencia para la palabra #${i + 1} que contiene la letra ${vword[i]}"
+                            placeholder="${rightPlaceholderOne}${i + 1} ${rightPlaceholderTwo} ${vword[i]}"
                             value=""
                             id="txt-refs-${i}">
                     </div>
@@ -287,7 +302,8 @@ function generateFormLoadCustomCrossword(vword) {
         GENERATOR_CONTAINER.innerHTML +=
         `<div class="row">
             <div class="col">
-                <input 
+                <input
+                    data-i18n="json_mode_button"
                     type="button" 
                     class="form-control btn btn-secondary" 
                     id="btn-jsonForm" 
@@ -296,6 +312,7 @@ function generateFormLoadCustomCrossword(vword) {
             </div>
             <div class="col">
                 <input 
+                    data-i18n="generate_button"
                     type="button" 
                     class="form-control btn btn-primary" 
                     id="btn-generateForm" 
@@ -401,30 +418,30 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">🔩 Configuración</h1>
+                <h1 data-i18n="config_modal_title" class="modal-title fs-5" id="exampleModalLabel">🔩 Configuración</h1>
             </div>
             <div class="modal-body">
                 <form class="form" id="colorForm">
                 <div class="row mb-3">
                     <div class="col-md-6">
-                    <label for="colorC" class="form-label">Palabra vertical:</label>
+                    <label data-i18n="config_vertical_setting" for="colorC" class="form-label">Palabra vertical:</label>
                     <input type="color" class="form-control form-control-color w-100" id="colorC" name="colorC"
                         value="#3C096C">
                     </div>
                     <div class="col-md-6">
-                    <label for="colorD" class="form-label">Borde de las celdas:</label>
+                    <label data-i18n="config_border_setting" for="colorD" class="form-label">Borde de las celdas:</label>
                     <input type="color" class="form-control form-control-color w-100" id="colorD" name="colorD"
                         value="#5A189A">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                    <label for="colorE" class="form-label">Celdas vacías:</label>
+                    <label data-i18n="config_empty_cell_setting" for="colorE" class="form-label">Celdas vacías:</label>
                     <input type="color" class="form-control form-control-color w-100" id="colorE" name="colorE"
                         value="#7B2CBF">
                     </div>
                     <div class="col-md-6">
-                    <label for="colorF" class="form-label">Palabra correcta/hover:</label>
+                    <label data-i18n="config_correct_cell_setting" for="colorF" class="form-label">Palabra correcta/hover:</label>
                     <input type="color" class="form-control form-control-color w-100" id="colorF" name="colorF"
                         value="#9D4EDD">
                     </div>
@@ -432,10 +449,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 </form>
             </div>
             <div class="modal-footer d-flex justify-content-evenly align-items-center">
-                <button type="button" class="btn btn-primary d-flex align-items-center" onclick="reiniciarColores()">
+                <button data-i18n="config_reset_settings" type="button" class="btn btn-primary d-flex align-items-center" onclick="reiniciarColores()">
                 🔄 Reiniciar valores
                 </button>
-                <button type="button" class="btn btn-primary d-flex align-items-center" onclick="saveColors()">
+                <button data-i18n="config_save_settings" type="button" class="btn btn-primary d-flex align-items-center" onclick="saveColors()">
                 💽 Guardar cambios
                 </button>
             </div>
