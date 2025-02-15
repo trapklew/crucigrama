@@ -1,13 +1,13 @@
 # Crucigrama
 
-## **Índice**
-- [Español 🇪🇸](#crucigrama-🇪🇸)
-- [Inglés](#-Crossword)
+## **Índice/Indices**
+- [Español 🇪🇸](#crucigrama--)
+- [English🇬🇧](#crossword)
 
 ## **Crucigrama 🇪🇸 **
-- [Generar tu propio crucigrama](#generar-tu-propio-crucigrama-💡)
+- [Generar tu propio crucigrama](#generar-tu-propio-crucigrama-)
 - [Generar tu propio crucigrama utilizando un JSON](#generar-tu-propio-crucigrama-utilizando-un-json)
-- [Imprimir el crucigrama](#imprimir-el-crucigrama-🖨️)
+- [Imprimir el crucigrama](#imprimir-el-crucigrama-%EF%B8%8F)
 
 ### **Generar tu propio crucigrama** 💡
 
